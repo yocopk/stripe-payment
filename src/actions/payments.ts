@@ -20,3 +20,27 @@ export async function createPaymentIntent(amount: number) {
     throw new Error(`Internal Server Error: ${error}`);
   }
 }
+
+export async function createSubscription() {
+  try {
+    const customer = await stripe.customers.create({
+      metadata: {
+        userId: "123",
+        name: "John Doe",
+        email: "qTnF1@example.com",
+        paymentMethod: "card",
+      },
+    });
+
+    const subscription = await stripe.subscriptions.create({
+      currency: "eur",
+      customer: customer.metadata.userId,
+      items: [{ plan: "pro-monthly" }],
+    });
+
+    return subscription;
+  } catch (error) {
+    console.error("Internal Error:", error);
+    throw new Error(`Internal Server Error: ${error}`);
+  }
+}

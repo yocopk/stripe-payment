@@ -6,7 +6,7 @@ import {
   useElements,
   PaymentElement,
 } from "@stripe/react-stripe-js";
-import { convertToSubcurrency } from "@/lib/convertToSubcurrency";
+import convertToSubcurrency from "@/lib/convertToSubcurrency";
 
 const CheckoutPage = ({ amount }: { amount: number }) => {
   const stripe = useStripe();
@@ -35,7 +35,6 @@ const CheckoutPage = ({ amount }: { amount: number }) => {
       }
     };
 
-    // Chiama la funzione asincrona
     createPaymentIntent();
   }, [amount]);
 
